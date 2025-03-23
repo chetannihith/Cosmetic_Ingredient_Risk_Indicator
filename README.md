@@ -1,119 +1,78 @@
-# Cosmetic_Ingredient_Risk_Indicator
+# Ingredient Inspector: AI-Powered Cosmetics Ingredient Risk Indicator
 
-# AI-Based Ingredient Risk Indicator
+## Overview
+Ingredient Inspector is an AI-driven tool designed to assess the safety of cosmetic products by analyzing their ingredient lists. The application uses AI methods to identify potentially harmful ingredients, highlight them in product labels, and provide detailed side effect information. 
 
-## Table of Contents
-- [Introduction](#introduction)
-- [Features](#features)
-- [Technology Stack](#technology-stack)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Methodology](#methodology)
-- [Results](#results)
-- [Future Enhancements](#future-enhancements)
-- [Contributors](#contributors)
-- [License](#license)
-
-## Introduction
-The **AI-Based Ingredient Risk Indicator** is an advanced AI-driven tool designed to evaluate the safety of cosmetic ingredients. Users can upload an image of a product's ingredient list, which is then processed using **Optical Character Recognition (OCR)** to extract text. The extracted ingredients are analyzed against a comprehensive database to classify them as **"Safe," "Caution," or "Harmful."**
-
-This project aims to provide consumers with **transparent, reliable** information regarding cosmetic ingredients, helping them make safer and informed choices.
+With its intuitive graphical interface, this tool empowers users to make informed decisions about the cosmetic products they use.
 
 ## Features
-✅ **OCR-Based Text Extraction:** Extracts ingredients from product labels.
-✅ **AI-Powered Analysis:** Uses NLP and machine learning to assess ingredient risks.
-✅ **Ingredient Classification:** Categorizes ingredients as **safe, cautionary, or harmful**.
-✅ **User-Friendly Web Interface:** Simple UI for uploading images and viewing results.
-✅ **Feedback Mechanism:** Users can submit corrections to improve the AI model.
-✅ **Scalability:** Potential applications in other industries like food safety and pharmaceuticals.
+- **Ingredient Detection**: Extracts ingredient lists from product labels using Optical Character Recognition (OCR).
+- **Harmful Ingredient Identification**: Compares extracted ingredients against a database of known harmful substances using similarity matching.
+- **Side Effect Analysis**: Uses Generative AI (Gemini API) to retrieve concise side effect summaries for each harmful ingredient.
+- **Visualization**: Highlights unsafe ingredients directly on the product label image.
+- **Image Retrieval**: Fetches representative images of side effects from Google Custom Search API.
 
-## Technology Stack
-- **Programming Language:** Python
-- **Machine Learning & NLP:** TensorFlow, Scikit-learn, SentenceTransformer
-- **OCR:** Tesseract OCR
-- **Web Framework:** Flask/Django
-- **Database:** SQLite/MySQL
-- **Frontend:** HTML, CSS, JavaScript (React/Bootstrap)
+## Technologies Used
+- **Python**
+  - `cv2`: For image processing.
+  - `pytesseract`: For OCR to extract text from product labels.
+  - `sentence-transformers`: For embedding generation and similarity comparison.
+  - `openpyxl`: For loading and managing harmful ingredient data from an Excel file.
+  - `google.generativeai`: For generating ingredient side effect summaries.
+  - `requests`: For fetching side effect images using Google Custom Search API.
+  - `tkinter`: For creating the user-friendly GUI.
+  - `PIL`: For image rendering in the GUI.
+- **External APIs**
+  - Gemini AI API (via `google.generativeai`)
+  - Google Custom Search API for image retrieval
 
-## Installation
-To set up the project locally, follow these steps:
-
+## Setup
 ### Prerequisites
-Ensure you have the following installed:
-- Python 3.8+
-- pip (Python package manager)
-- Tesseract OCR
+1. Python 3.8 or later.
+2. Install the required Python libraries:
+    ```bash
+    pip install opencv-python pytesseract sentence-transformers openpyxl google-generativeai requests pillow
+    ```
+3. Install Tesseract OCR:
+    - Download and install Tesseract OCR from [here](https://github.com/tesseract-ocr/tesseract).
+    - Update the `pytesseract.pytesseract.tesseract_cmd` path in the script to point to the Tesseract executable.
+4. Set up API keys:
+    - **Gemini API**: Obtain an API key and replace the placeholder in the code.
+    - **Google Custom Search API**: Generate an API key and a search engine ID (CX) from [Google Developers Console](https://console.developers.google.com/).
 
-### Steps
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/ingredient-risk-indicator.git
-cd ingredient-risk-indicator
-
-# Create a virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-
-# Install required dependencies
-pip install -r requirements.txt
-
-# Run the application
-python app.py
-```
+### Installation
+1. Clone this repository:
+    ```bash
+    git clone https://github.com/your-repo/ingredient-inspector.git
+    cd Ingredient_lnspector
+    ```
+2. Place the `harmful_ingredients.xlsx` file in the project directory. This file contains a list of harmful ingredients in column A, starting from row 2.
 
 ## Usage
-1. Open the web application in your browser.
-2. Upload an image containing a product's ingredient list.
-3. The system will process the image and extract text using OCR.
-4. Ingredients will be classified as **Safe, Caution, or Harmful.**
-5. View results and additional information about harmful ingredients.
-6. Submit feedback if you notice any incorrect classifications.
+1. Run the application:
+    ```bash
+    python main.py
+    ```
+2. Use the GUI to:
+    - Upload an image of a product label.
+    - View highlighted unsafe ingredients and their side effects.
+    - Explore representative images for common side effects.
 
-## Project Structure
-```
-├── dataset/                # Predefined ingredient database
-├── models/                 # Trained AI/ML models
-├── static/                 # Frontend assets (CSS, JS, Images)
-├── templates/              # HTML templates
-├── app.py                  # Main application script
-├── requirements.txt        # Python dependencies
-├── README.md               # Project documentation
-```
+## Example Workflow
+1. **Input**: Upload an image of a cosmetic product label.
+2. **Processing**: The application extracts text using OCR, analyzes the ingredient list, and identifies harmful substances.
+3. **Output**: Unsafe ingredients are highlighted on the image, and detailed side effect information is displayed with illustrative images.
 
-## Methodology
-### 1. **Data Collection**
-- Large dataset of known cosmetic ingredients.
-- Mapping of ingredients to hazard categories (Safe, Caution, Harmful).
+## Screenshots
 
-### 2. **Text Extraction**
-- **Tesseract OCR** extracts text from uploaded images.
-- **Preprocessing techniques** remove noise, correct misspellings.
+### UNSAFE
+![INTERFACE](Ingredient_Inspector/Test%20Images/harmful.jpeg)
 
-### 3. **Ingredient Classification**
-- Uses **SentenceTransformer embeddings** for matching ingredient names.
-- **Cosine similarity metric** determines the closest match.
-- **Decision Tree Classifier** classifies ingredients into risk categories.
+### SAFE
+![INTERFACE](Ingredient_Inspector/Test%20Images/safe.jpeg)
 
-### 4. **User Interface & Feedback Loop**
-- Web-based application for easy user interaction.
-- Feedback from users refines the AI model for better accuracy.
-
-## Results
-✔ **High Accuracy**: 85%+ accuracy in identifying harmful ingredients.
-✔ **Fast Processing**: Results displayed in under 5 seconds.
-✔ **User Feedback Integration**: Improves AI predictions over time.
-✔ **Scalable Design**: Easily extendable to other domains (food, pharmaceuticals).
-
-## Future Enhancements
-- 📌 **Mobile App Development** for better accessibility.
-- 📌 **Real-Time API** integration for instant ingredient checks.
-- 📌 **Support for Multiple Languages** to expand global reach.
-- 📌 **Expanded Database** with more regulatory standards.
-
-## Contributors
-- **Vemula Chetan Nihith**  
-- **Abhinav Vuddagiri**  
-- **Sapare Aravind**  
-- **Siva Gopal Krishna**  
-- **Mentor: Dr. Hirdesh Pharasi**  
+## Acknowledgments
+- Tesseract OCR
+- Sentence Transformers
+- Google Generative AI
+- Google Custom Search API

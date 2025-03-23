@@ -69,7 +69,7 @@ With its intuitive graphical interface, this tool empowers users to make informe
 ![INTERFACE](harmful.jpeg)
 
 ### SAFE
-![INTERFACE](Ingredient_Inspector/Test%20Images/safe.jpeg)
+![INTERFACE](safe.jpeg)
 
 ## Acknowledgments
 - Tesseract OCR

@@ -66,7 +66,7 @@ With its intuitive graphical interface, this tool empowers users to make informe
 ## Screenshots
 
 ### UNSAFE
-![INTERFACE](Ingredient_Inspector/Test%20Images/harmful.jpeg)
+![INTERFACE](harmful.jpeg)
 
 ### SAFE
 ![INTERFACE](Ingredient_Inspector/Test%20Images/safe.jpeg)
